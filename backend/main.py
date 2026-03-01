@@ -8,7 +8,7 @@ from config import settings
 from database import init_db
 
 # Import routes
-from routes import assessment, chat, conversation, doctors
+from routes import assessment, chat, conversation, doctors, facilities, reminders, multimodal
 
 # Create FastAPI app
 app = FastAPI(
@@ -31,6 +31,9 @@ app.include_router(conversation.router)
 app.include_router(assessment.router)
 app.include_router(chat.router)
 app.include_router(doctors.router)
+app.include_router(facilities.router)
+app.include_router(reminders.router)
+app.include_router(multimodal.router)
 
 # Initialize database on startup
 @app.on_event("startup")

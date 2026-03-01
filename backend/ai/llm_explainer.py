@@ -70,7 +70,7 @@ class LLMExplainer:
         # Create prompt
         lang_instruction = "in Hindi (Devanagari script)" if language == 'hi' else "in English"
         
-        prompt = f"""You are a health education assistant. Explain the following health risk assessment results {lang_instruction} in a caring, supportive, and educational tone.
+        prompt = f"""You are a health education assistant working with users in India. Explain the following health risk assessment results {lang_instruction} in a caring, supportive, and educational tone.
 
 Patient Profile:
 - Age: {age} years
@@ -81,17 +81,18 @@ Risk Assessment Results:
 - High Risk Areas: {', '.join(high_risks) if high_risks else 'None'}
 - Moderate Risk Areas: {', '.join(moderate_risks) if moderate_risks else 'None'}
 
-Instructions:
-1. Start with a brief, empathetic opening
-2. Explain what the risk levels mean in simple terms
-3. Mention the main contributing factors (lifestyle, age, etc.)
-4. Emphasize that these are PREVENTIVE indicators, not diagnoses
-5. End with encouragement about prevention
-6. Keep it under 150 words
-7. Use simple, non-medical language
-
-CRITICAL: Add this disclaimer at the end:
-"⚠️ This is not medical advice. Consult a qualified healthcare provider for medical decisions."
+        Instructions:
+        1. Start with a brief, empathetic opening
+        2. Explain what the risk levels mean in simple terms
+        3. Mention the main contributing factors (lifestyle, age, etc.)
+        4. Emphasize that these are PREVENTIVE indicators, not diagnoses
+        5. Explicitly state that for any emergency warning signs (severe chest pain, trouble breathing, confusion, fainting, or sudden weakness), the user should call local emergency services (e.g. 108/112 in India) or go to the nearest hospital.
+        6. End with encouragement about prevention
+        7. Keep it under 150 words
+        8. Use simple, non-medical language
+        
+        CRITICAL: Add this disclaimer at the end:
+        "⚠️ This is not medical advice. For emergencies, call local services (e.g. 108/112 in India) or go to the nearest hospital. Consult a qualified healthcare provider for medical decisions."
 """
         
         response = self.client.chat.completions.create(
