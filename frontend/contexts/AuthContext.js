@@ -20,11 +20,13 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         // Check for dummy session in localStorage first
-        const dummySession = localStorage.getItem('dummyUser');
-        if (dummySession) {
-            setUser(JSON.parse(dummySession));
-            setLoading(false);
-            return;
+        if (typeof window !== 'undefined') {
+            const dummySession = localStorage.getItem('dummyUser');
+            if (dummySession) {
+                setUser(JSON.parse(dummySession));
+                setLoading(false);
+                return;
+            }
         }
 
         const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
@@ -64,7 +66,9 @@ export function AuthProvider({ children }) {
 
     const signOut = async () => {
         try {
-            localStorage.removeItem('dummyUser');
+            if (typeof window !== 'undefined') {
+                localStorage.removeItem('dummyUser');
+            }
             await firebaseSignOut(auth);
             setUser(null);
         } catch (error) {
@@ -76,7 +80,9 @@ export function AuthProvider({ children }) {
 
     const dummyLogin = (profile) => {
         const dummyUser = { ...profile, uid: 'dummy-123' };
-        localStorage.setItem('dummyUser', JSON.stringify(dummyUser));
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('dummyUser', JSON.stringify(dummyUser));
+        }
         setUser(dummyUser);
     };
 
