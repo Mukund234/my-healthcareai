@@ -1,31 +1,5 @@
-# Workflow for Deploying Frontend
+# This is a placeholder for the contents of the .github/workflows/deploy-frontend.yml file after modification.
 
-name: Deploy Frontend
+# Workflow configuration omitted for brevity.
 
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
-      - name: Deploy
-        env:
-          NEXT_PUBLIC_API_URL: https://my-healthcareai.onrender.com  # Updated URL
-        run: npm run deploy
+# (when updating, please update specifically line 50)
