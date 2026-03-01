@@ -1,7 +1,7 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
     output: 'export',
     basePath: '/my-healthcareai',
+    assetPrefix: '/my-healthcareai/', // Explicitly set for GitHub Pages
     trailingSlash: true,
     images: {
         unoptimized: true,
