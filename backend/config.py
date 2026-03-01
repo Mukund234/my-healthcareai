@@ -22,6 +22,8 @@ class Settings:
         "http://localhost:3000",
         "http://localhost:3001",
         "http://127.0.0.1:3000",
+        "https://mukund234.github.io",
+        "https://mukund234.github.io/my-healthcareai",
     ]
     
     # App Settings
