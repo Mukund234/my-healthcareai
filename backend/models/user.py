@@ -7,8 +7,11 @@ class User(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True, nullable=True)
-    age = Column(Integer, nullable=False)
-    gender = Column(String, nullable=False)  # male, female, other
+    full_name = Column(String, nullable=True)
+    avatar_url = Column(String, nullable=True)
+    age = Column(Integer, nullable=True)
+    gender = Column(String, nullable=True)  # male, female, other
+    is_premium = Column(Boolean, default=False)
     
     # Consent and Privacy
     consent_given = Column(Boolean, default=False)
@@ -19,4 +22,5 @@ class User(Base):
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
     
     def __repr__(self):
-        return f"<User {self.id} - Age: {self.age}, Gender: {self.gender}>"
+        name_display = self.full_name or self.email or f"User {self.id}"
+        return f"<{name_display} - Age: {self.age}, Premium: {self.is_premium}>"
