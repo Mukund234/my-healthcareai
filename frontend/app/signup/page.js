@@ -125,7 +125,18 @@ export default function SignupPage() {
                             onChange={(e) => setFullName(e.target.value)}
                             required
                             placeholder="Dr. Shreyas Gupta"
-                            className="cyber-input"
+                            style={{
+                                padding: '0.875rem',
+                                background: 'rgba(0, 0, 0, 0.5)',
+                                border: '1px solid var(--border-subtle)',
+                                borderRadius: '8px',
+                                color: 'white',
+                                outline: 'none',
+                                transition: 'all 0.2s',
+                                width: '100%'
+                            }}
+                            onFocus={(e) => e.target.style.border = '1px solid var(--cyber-cyan)'}
+                            onBlur={(e) => e.target.style.border = '1px solid var(--border-subtle)'}
                         />
                     </div>
 
@@ -142,7 +153,18 @@ export default function SignupPage() {
                                 min="1"
                                 max="120"
                                 placeholder="35"
-                                className="cyber-input"
+                                style={{
+                                    padding: '0.875rem',
+                                    background: 'rgba(0, 0, 0, 0.5)',
+                                    border: '1px solid var(--border-subtle)',
+                                    borderRadius: '8px',
+                                    color: 'white',
+                                    outline: 'none',
+                                    transition: 'all 0.2s',
+                                    width: '100%'
+                                }}
+                                onFocus={(e) => e.target.style.border = '1px solid var(--cyber-cyan)'}
+                                onBlur={(e) => e.target.style.border = '1px solid var(--border-subtle)'}
                             />
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: 2 }}>
@@ -153,7 +175,6 @@ export default function SignupPage() {
                                 value={gender}
                                 onChange={(e) => setGender(e.target.value)}
                                 required
-                                className="cyber-input"
                                 style={{
                                     padding: '0.875rem',
                                     background: 'rgba(0, 0, 0, 0.5)',
@@ -162,8 +183,11 @@ export default function SignupPage() {
                                     color: 'white',
                                     outline: 'none',
                                     transition: 'all 0.2s',
-                                    cursor: 'pointer'
+                                    cursor: 'pointer',
+                                    width: '100%'
                                 }}
+                                onFocus={(e) => e.target.style.border = '1px solid var(--cyber-cyan)'}
+                                onBlur={(e) => e.target.style.border = '1px solid var(--border-subtle)'}
                             >
                                 <option value="" disabled>Select</option>
                                 <option value="male">Male</option>
@@ -183,7 +207,18 @@ export default function SignupPage() {
                             onChange={(e) => setEmail(e.target.value)}
                             required
                             placeholder="patient@example.com"
-                            className="cyber-input"
+                            style={{
+                                padding: '0.875rem',
+                                background: 'rgba(0, 0, 0, 0.5)',
+                                border: '1px solid var(--border-subtle)',
+                                borderRadius: '8px',
+                                color: 'white',
+                                outline: 'none',
+                                transition: 'all 0.2s',
+                                width: '100%'
+                            }}
+                            onFocus={(e) => e.target.style.border = '1px solid var(--cyber-cyan)'}
+                            onBlur={(e) => e.target.style.border = '1px solid var(--border-subtle)'}
                         />
                     </div>
 
@@ -197,7 +232,18 @@ export default function SignupPage() {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                             placeholder="Minimum 6 characters"
-                            className="cyber-input"
+                            style={{
+                                padding: '0.875rem',
+                                background: 'rgba(0, 0, 0, 0.5)',
+                                border: '1px solid var(--border-subtle)',
+                                borderRadius: '8px',
+                                color: 'white',
+                                outline: 'none',
+                                transition: 'all 0.2s',
+                                width: '100%'
+                            }}
+                            onFocus={(e) => e.target.style.border = '1px solid var(--cyber-cyan)'}
+                            onBlur={(e) => e.target.style.border = '1px solid var(--border-subtle)'}
                         />
                     </div>
 
@@ -250,24 +296,6 @@ export default function SignupPage() {
                     Already registered? <Link href="/login" style={{ color: 'var(--cyber-cyan)', textDecoration: 'none', fontWeight: 'bold' }}>Initiate Login</Link>
                 </div>
             </div>
-
-            {/* Global style for inputs specifically for this component to maintain cleanliness */}
-            <style jsx global>{`
-                .cyber-input {
-                    padding: 0.875rem;
-                    background: rgba(0, 0, 0, 0.5);
-                    border: 1px solid var(--border-subtle);
-                    border-radius: 8px;
-                    color: white;
-                    outline: none;
-                    transition: all 0.2s;
-                    font-family: inherit;
-                }
-                .cyber-input:focus {
-                    border: 1px solid var(--cyber-cyan);
-                    box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
-                }
-            `}</style>
         </div>
     );
 }
