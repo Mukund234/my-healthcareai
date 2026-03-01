@@ -6,6 +6,8 @@ load_dotenv()
 class Settings:
     # Database
     DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./health_predictor.db")
+    MONGO_URL = os.getenv("MONGO_URL", "")
+    MONGO_DB_NAME = os.getenv("MONGO_DB_NAME", "healthcare_ai")
     
     # API Keys
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")

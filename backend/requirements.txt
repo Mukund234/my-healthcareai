@@ -35,3 +35,6 @@ fastapi-cors>=0.0.6
 
 # Utilities
 httpx>=0.26.0
+
+# MongoDB
+pymongo>=4.8.0
