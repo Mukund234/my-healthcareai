@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from ai.llm_explainer import get_explainer
+from services.audit_logger import log_event
 from database import get_db
 from models.health_assessment import HealthAssessment
 from models.risk_result import RiskResult
@@ -174,6 +175,21 @@ async def send_health_message(request: HealthChatMessageRequest):
     }
 
     triage = risk_results.get("triage", {})
+
+    # Log triage and risk snapshot for monitoring / future model training
+    try:
+        log_event(
+            "chat_triage_completed",
+            {
+                "session_id": request.session_id,
+                "collected_data": session["collected_data"],
+                "risk_snapshot": risk_snapshot,
+                "triage": triage,
+            },
+        )
+    except Exception:
+        # Logging should never break user flow
+        pass
     reply = (
         f"Your current screening risk is {risk_snapshot['overall_severity'].upper()} "
         f"({risk_snapshot['overall_risk_score']:.2f}). "

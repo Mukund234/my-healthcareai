@@ -188,8 +188,8 @@ class RiskCalculator:
             risk_level = "Emergency"
             urgency = "Immediate emergency care"
             next_steps = [
-                "Call local emergency services now.",
-                "Do not delay for online consultation.",
+                "Call local emergency services (e.g. 108/112 in India) now.",
+                "Do not delay for online or teleconsultation.",
                 "Keep someone with the patient while waiting for help."
             ]
         elif overall_severity == "high" or doctor_consult == "urgent":
@@ -227,7 +227,8 @@ class RiskCalculator:
                 "confusion or fainting",
                 "sudden weakness on one side"
             ],
-            "disclaimer": "This tool is a screening aid and not a medical diagnosis."
+            "india_emergency_numbers": ["108", "112"],
+            "disclaimer": "This tool is a screening aid and not a medical diagnosis. In an emergency, call local services or go to the nearest hospital immediately."
         }
     
     def _generate_recommendations(self, age, risk_scores, severity_levels):
