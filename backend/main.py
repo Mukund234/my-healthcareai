@@ -28,6 +28,8 @@ app.add_middleware(
 
 # Include routers
 app.include_router(conversation.router)
+app.include_router(assessment.router)
+app.include_router(chat.router)
 app.include_router(doctors.router)
 
 # Initialize database on startup

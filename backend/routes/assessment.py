@@ -5,13 +5,14 @@ API routes for health assessment submission and retrieval.
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, Field
-from typing import Optional, Dict, List
+from typing import Optional, Dict, List, Any
 from datetime import datetime
 
 from database import get_db
 from models.health_assessment import HealthAssessment
 from models.risk_result import RiskResult
 from risk_engine.risk_calculator import RiskCalculator
+from risk_engine.questionnaire import get_questionnaire_schema
 from ai.llm_explainer import get_explainer
 
 router = APIRouter(prefix="/api/assessment", tags=["assessment"])
@@ -67,9 +68,18 @@ class AssessmentResponse(BaseModel):
     overall_risk_score: float
     overall_severity: str
     recommendations: List[str]
+    risk_explanations: List[Dict[str, Any]]
+    triage: Dict[str, Any]
     explanation: str
     doctor_consult_needed: str
     created_at: datetime
+
+@router.get("/questionnaire")
+async def get_questionnaire():
+    """
+    Get structured assessment questions for chatbot/form rendering
+    """
+    return get_questionnaire_schema()
 
 @router.post("/submit", response_model=AssessmentResponse)
 async def submit_assessment(
@@ -111,7 +121,7 @@ async def submit_assessment(
     db.refresh(db_assessment)
     
     # Calculate risks
-    calculator = RiskCalculator(use_ml=False)  # Start with WHO rules only
+    calculator = RiskCalculator(use_ml=True)
     
     assessment_data = {
         'age': assessment.age,
@@ -171,6 +181,8 @@ async def submit_assessment(
         overall_risk_score=risk_results['overall_risk_score'],
         overall_severity=risk_results['overall_severity'],
         recommendations=risk_results['recommendations'],
+        risk_explanations=risk_results.get('risk_explanations', []),
+        triage=risk_results.get('triage', {}),
         explanation=explanation,
         doctor_consult_needed=risk_results['doctor_consult_needed'],
         created_at=db_assessment.created_at
@@ -201,6 +213,24 @@ async def get_assessment(
     if not risk_result:
         raise HTTPException(status_code=404, detail="Risk results not found")
     
+    # Rebuild triage/explanations from stored assessment data.
+    calculator = RiskCalculator(use_ml=True)
+    assessment_data = {
+        'age': assessment.age,
+        'gender': assessment.gender,
+        'height_cm': assessment.height_cm,
+        'weight_kg': assessment.weight_kg,
+        'activity_level': assessment.activity_level,
+        'sleep_hours': assessment.sleep_hours,
+        'smoking': assessment.smoking,
+        'alcohol_consumption': assessment.alcohol_consumption,
+        'family_history': assessment.family_history or {},
+        'stress_level': assessment.stress_level,
+        'blood_pressure_systolic': assessment.blood_pressure_systolic,
+        'symptoms': assessment.symptoms or []
+    }
+    rebuilt = calculator.calculate_all_risks(assessment_data)
+
     return AssessmentResponse(
         assessment_id=assessment.id,
         risk_scores=RiskScores(
@@ -213,6 +243,8 @@ async def get_assessment(
         overall_risk_score=risk_result.overall_risk_score,
         overall_severity=risk_result.overall_severity,
         recommendations=risk_result.recommendations,
+        risk_explanations=rebuilt.get("risk_explanations", []),
+        triage=rebuilt.get("triage", {}),
         explanation=risk_result.explanation_text,
         doctor_consult_needed=risk_result.doctor_consult_needed,
         created_at=assessment.created_at
