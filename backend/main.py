@@ -18,6 +18,7 @@ from routes import (
     multimodal,
     reports,
     vision,
+    auth,
 )
 
 # Create FastAPI app
@@ -46,6 +47,7 @@ app.include_router(reminders.router)
 app.include_router(multimodal.router)
 app.include_router(reports.router)
 app.include_router(vision.router)
+app.include_router(auth.router)
 
 # Initialize database on startup
 @app.on_event("startup")
