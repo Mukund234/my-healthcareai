@@ -16,38 +16,37 @@ export default function RootLayout({ children }) {
             </head>
             <body style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
                 <AuthProvider>
-                    {/* Medical Disclaimer Banner - Cyber Style */}
+                    {/* Medical Disclaimer Banner */}
                     <div style={{
-                        background: 'rgba(255, 42, 42, 0.05)',
-                        borderBottom: '1px solid rgba(255, 42, 42, 0.2)',
+                        background: 'rgba(245, 158, 11, 0.06)',
+                        borderBottom: '1px solid rgba(245, 158, 11, 0.2)',
                         padding: '0.5rem',
                         textAlign: 'center',
                         fontSize: '0.75rem',
-                        color: 'var(--cyber-red)',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.1em',
-                        fontWeight: 'bold'
+                        color: '#92400E',
+                        letterSpacing: '0.02em',
+                        fontWeight: '500'
                     }}>
-                        ⚠️ Medical Disclaimer: This is not medical advice or diagnosis. Consult a professional provider.
+                        ⚠️ Medical Disclaimer: This tool does not provide medical advice or diagnosis. Always consult a qualified healthcare professional.
                     </div>
 
                     {children}
 
-                    {/* Footer - Cyber Style */}
+                    {/* Footer */}
                     <footer style={{
                         marginTop: '4rem',
                         padding: '3rem 2rem',
                         textAlign: 'center',
-                        borderTop: '1px solid var(--border-subtle)',
+                        borderTop: '1px solid var(--border-light)',
                         background: 'var(--bg-secondary)',
                         color: 'var(--text-tertiary)'
                     }}>
                         <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-                            <p style={{ fontSize: '0.875rem', fontWeight: 'bold', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
-                                AROGYA AI - CYBER DIAGNOSTIC SYSTEM v4.2.1
+                            <p style={{ fontSize: '0.9375rem', fontWeight: '700', color: 'var(--emerald-green)', marginBottom: '0.5rem' }}>
+                                Arogya AI
                             </p>
-                            <p style={{ fontSize: '0.75rem' }}>
-                                Developed for early risk prediction & preventive oversight.
+                            <p style={{ fontSize: '0.8125rem' }}>
+                                Intelligent healthcare companion for early risk prediction &amp; preventive care.
                                 Built upon WHO-validated clinical protocols.
                             </p>
                         </div>
