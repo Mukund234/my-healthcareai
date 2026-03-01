@@ -14,34 +14,43 @@ export default function RootLayout({ children }) {
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
             </head>
-            <body>
+            <body style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
                 <AuthProvider>
-                    {/* Medical Disclaimer Banner */}
+                    {/* Medical Disclaimer Banner - Cyber Style */}
                     <div style={{
-                        background: 'rgba(255, 107, 157, 0.1)',
-                        borderBottom: '2px solid rgba(255, 107, 157, 0.3)',
-                        padding: '0.75rem',
+                        background: 'rgba(255, 42, 42, 0.05)',
+                        borderBottom: '1px solid rgba(255, 42, 42, 0.2)',
+                        padding: '0.5rem',
                         textAlign: 'center',
-                        fontSize: '0.875rem',
-                        color: '#ff6b9d'
+                        fontSize: '0.75rem',
+                        color: 'var(--cyber-red)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.1em',
+                        fontWeight: 'bold'
                     }}>
-                        ⚠️ <strong>Medical Disclaimer:</strong> This is not medical advice or diagnosis. Consult a qualified healthcare provider for medical decisions.
+                        ⚠️ Medical Disclaimer: This is not medical advice or diagnosis. Consult a professional provider.
                     </div>
 
                     {children}
 
-                    {/* Footer */}
+                    {/* Footer - Cyber Style */}
                     <footer style={{
                         marginTop: '4rem',
-                        padding: '2rem',
+                        padding: '3rem 2rem',
                         textAlign: 'center',
-                        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-                        color: 'var(--text-muted)'
+                        borderTop: '1px solid var(--border-subtle)',
+                        background: 'var(--bg-secondary)',
+                        color: 'var(--text-tertiary)'
                     }}>
-                        <p>Early Health Risk Predictor v1.0 | For Educational & Preventive Purposes Only</p>
-                        <p style={{ fontSize: '0.875rem', marginTop: '0.5rem' }}>
-                            Always consult with qualified healthcare professionals for medical advice
-                        </p>
+                        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+                            <p style={{ fontSize: '0.875rem', fontWeight: 'bold', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
+                                AROGYA AI - CYBER DIAGNOSTIC SYSTEM v4.2.1
+                            </p>
+                            <p style={{ fontSize: '0.75rem' }}>
+                                Developed for early risk prediction & preventive oversight.
+                                Built upon WHO-validated clinical protocols.
+                            </p>
+                        </div>
                     </footer>
                 </AuthProvider>
             </body>
