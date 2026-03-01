@@ -38,3 +38,6 @@ httpx>=0.26.0
 
 # MongoDB
 pymongo>=4.8.0
+
+# PDF reports
+reportlab>=4.2.0
