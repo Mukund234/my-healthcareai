@@ -1,7 +1,24 @@
-# Your content of the file with line 50 updated
+name: Deploy Frontend
 
-# assuming the previous contents are still intact
-# ...
+on:
+  push:
+    branches:
+      - main
 
-NEXT_PUBLIC_API_URL: https://my-healthcareai.onrender.com
-# ...
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build with Next.js
+        env:
+          NEXT_PUBLIC_API_URL: https://my-healthcareai.onrender.com
+        run: |
+          npm install
+          npm run build
+
+      - name: Deploy to Server
+        run: |
+          npm run deploy
