@@ -39,15 +39,13 @@ jobs:
           
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        with:
-          static_site_generator: next
           
       - name: Install dependencies
-        run: npm ci
+        run: npm install
         
       - name: Build with Next.js
         # Disable linting during build to ensure it passes if there are minor warnings
-        run: CI=false npx next build
+        run: CI=false npx next build --debug
         env:
           # Your backend URL goes here so the static HTML knows where to reach out to.
           # Until your backend is hosted, this points to localhost.
