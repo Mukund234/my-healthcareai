@@ -26,5 +26,5 @@ def get_db():
 # Initialize database tables
 def init_db():
     # Import all models here to ensure they're registered with Base
-    from models import user, health_assessment, risk_result
+    from models import user, health_assessment, risk_result, medication_reminder
     Base.metadata.create_all(bind=engine)
